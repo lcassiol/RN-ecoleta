@@ -23,12 +23,19 @@ interface IBGECityresponse {
 
 const Home = () => {
   const navigation = useNavigation();
-  const [ufs, setUFs] = useState<SelectProps[]>([
-    { label: "Selecione o estado", value: "" },
-  ]);
-  const [cities, setCities] = useState<SelectProps[]>([
-    { label: "Selecione a cidade", value: "" },
-  ]);
+  const ufPlaceHolder = {
+    label: "Selecione o estado",
+    value: null,
+    color: "#9EA0A4",
+  };
+
+  const cityPlaceHolder = {
+    label: "Selecione a cidade",
+    value: null,
+    color: "#9EA0A4",
+  };
+  const [ufs, setUFs] = useState<SelectProps[]>([]);
+  const [cities, setCities] = useState<SelectProps[]>([]);
   const [selectedUF, setSelectedUf] = useState("0");
   const [selectedCity, setSelectedCity] = useState("0");
 
@@ -49,7 +56,7 @@ const Home = () => {
         };
       });
 
-      setUFs([...ufs, ...ufOptions]);
+      setUFs(ufOptions);
     }
 
     getUfs();
@@ -57,7 +64,7 @@ const Home = () => {
 
   useEffect(() => {
     async function getCities() {
-      if (selectedUF === "0") {
+      if (selectedUF === null) {
         return;
       }
 
@@ -65,7 +72,6 @@ const Home = () => {
         `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUF}/municipios`
       );
 
-      const defaultCity = { label: "Selecione a cidade", value: "" };
       const cityNames = data.map((city) => {
         return {
           label: city.nome,
@@ -73,11 +79,16 @@ const Home = () => {
         };
       });
 
-      setCities([defaultCity, ...cityNames]);
+      setCities(cityNames);
     }
 
     getCities();
   }, [selectedUF]);
+
+  function handleSelectUF(uf: string) {
+    setSelectedUf(uf);
+    setCities([]);
+  }
 
   return (
     <ImageBackground
@@ -95,22 +106,24 @@ const Home = () => {
 
       <View style={styles.footer}>
         <RNPickerSelect
-          style={styles.select}
-          onValueChange={(value) => console.log(value)}
+          placeholder={ufPlaceHolder}
+          onValueChange={(value) => handleSelectUF(value)}
           items={ufs}
+          value={selectedUF}
         />
         <RNPickerSelect
-          style={styles.select}
-          onValueChange={(value) => console.log(value)}
+          placeholder={cityPlaceHolder}
+          onValueChange={(value) => setSelectedCity(value)}
           items={cities}
+          value={selectedCity}
         />
         <RectButton style={styles.button} onPress={handleNavigateToPoints}>
           <View style={styles.buttonIcon}>
             <Text>
               <Icon name="arrow-right" color="#FFF" size={24} />
             </Text>
-            <Text style={styles.buttonText}>Entrar</Text>
           </View>
+          <Text style={styles.buttonText}>Entrar</Text>
         </RectButton>
       </View>
     </ImageBackground>
