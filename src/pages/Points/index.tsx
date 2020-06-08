@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Feather as Icon } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   View,
   TouchableOpacity,
@@ -26,16 +26,23 @@ interface ItemsProps {
 interface PointProps {
   id: number;
   name: string;
-  image: string;
+  image_url: string;
   latitude: number;
   longitude: number;
 }
 
+interface RouteParams {
+  uf: string;
+  city: string;
+}
+
 const Points = () => {
   const navigation = useNavigation();
+  const route = useRoute();
   const [items, setItems] = useState<ItemsProps[]>([]);
   const [points, setPoints] = useState<PointProps[]>([]);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const { uf, city } = route.params as RouteParams;
 
   const [initialPosition, setInitialPosition] = useState<[number, number]>([
     0,
@@ -70,15 +77,17 @@ const Points = () => {
     }
 
     loadPositions();
-  });
+  }, []);
 
   useEffect(() => {
     async function loadPoints() {
+      console.log(city);
+      console.log(uf);
       const { data } = await api.get("points", {
         params: {
-          city: "Recife",
-          uf: "PE",
-          items: [1],
+          city: city,
+          uf: uf,
+          items: selectedItems,
         },
       });
 
@@ -86,7 +95,7 @@ const Points = () => {
     }
 
     loadPoints();
-  });
+  }, [selectedItems]);
 
   function handleNavigateBack() {
     navigation.goBack();
@@ -141,10 +150,10 @@ const Points = () => {
                     longitude: point.longitude,
                   }}
                 >
-                  <View>
+                  <View style={styles.mapMarkerContainer}>
                     <Image
                       style={styles.mapMarkerImage}
-                      source={{ uri: point.image }}
+                      source={{ uri: point.image_url }}
                     />
                     <Text style={styles.mapMarkerTitle}>{point.name}</Text>
                   </View>

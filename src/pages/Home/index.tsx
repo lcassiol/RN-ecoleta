@@ -36,11 +36,14 @@ const Home = () => {
   };
   const [ufs, setUFs] = useState<SelectProps[]>([]);
   const [cities, setCities] = useState<SelectProps[]>([]);
-  const [selectedUF, setSelectedUf] = useState("0");
-  const [selectedCity, setSelectedCity] = useState("0");
+  const [selectedUF, setSelectedUf] = useState<string>();
+  const [selectedCity, setSelectedCity] = useState<string>();
 
   function handleNavigateToPoints() {
-    navigation.navigate("Points");
+    navigation.navigate("Points", {
+      uf: selectedUF,
+      city: selectedCity,
+    });
   }
 
   useEffect(() => {
@@ -139,14 +142,16 @@ const Home = () => {
         />
       </View>
       <View style={styles.footer}>
-        <RectButton style={styles.button} onPress={handleNavigateToPoints}>
-          <View style={styles.buttonIcon}>
-            <Text>
-              <Icon name="arrow-right" color="#FFF" size={24} />
-            </Text>
-          </View>
-          <Text style={styles.buttonText}>Entrar</Text>
-        </RectButton>
+        {selectedUF && selectedCity && (
+          <RectButton style={styles.button} onPress={handleNavigateToPoints}>
+            <View style={styles.buttonIcon}>
+              <Text>
+                <Icon name="arrow-right" color="#FFF" size={24} />
+              </Text>
+            </View>
+            <Text style={styles.buttonText}>Entrar</Text>
+          </RectButton>
+        )}
       </View>
     </ImageBackground>
   );

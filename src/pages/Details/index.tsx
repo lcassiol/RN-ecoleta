@@ -21,7 +21,7 @@ interface ParamsProps {
 
 interface DataProps {
   point: {
-    image: string;
+    image_url: string;
     name: string;
     email: string;
     whatsapp: string;
@@ -77,7 +77,10 @@ const Details = () => {
           <Icon name="arrow-left" size={20} color="#34cb79" />
         </TouchableOpacity>
 
-        <Image style={styles.pointImage} source={{ uri: data.point.image }} />
+        <Image
+          style={styles.pointImage}
+          source={{ uri: data.point.image_url }}
+        />
 
         <Text style={styles.pointName}>{data.point.name}</Text>
         <Text style={styles.pointItems}>
@@ -98,7 +101,7 @@ const Details = () => {
         </RectButton>
 
         <RectButton style={styles.button} onPress={handleComposeMail}>
-          <FontAwesome name="mail" size={20} color="#FFF" />
+          <Icon name="mail" size={20} color="#FFF" />
           <Text style={styles.buttonText}>E-mail</Text>
         </RectButton>
       </View>
