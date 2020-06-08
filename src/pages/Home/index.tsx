@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import RNPickerSelect from "react-native-picker-select";
 import api from "../../services/api";
 
-import styles from "./styles";
+import { styles, pickerSelectStyles } from "./styles";
 
 interface SelectProps {
   label: string;
@@ -104,19 +104,41 @@ const Home = () => {
         </Text>
       </View>
 
-      <View style={styles.footer}>
+      <View style={{ justifyContent: "flex-end", marginBottom: 50 }}>
         <RNPickerSelect
+          style={{
+            ...pickerSelectStyles,
+            iconContainer: {
+              top: 10,
+              right: 12,
+            },
+          }}
           placeholder={ufPlaceHolder}
           onValueChange={(value) => handleSelectUF(value)}
           items={ufs}
           value={selectedUF}
+          Icon={() => {
+            return <Icon name="arrow-down" color="#cccc" size={24} />;
+          }}
         />
         <RNPickerSelect
+          style={{
+            ...pickerSelectStyles,
+            iconContainer: {
+              top: 10,
+              right: 12,
+            },
+          }}
           placeholder={cityPlaceHolder}
           onValueChange={(value) => setSelectedCity(value)}
           items={cities}
           value={selectedCity}
+          Icon={() => {
+            return <Icon name="arrow-down" color="#cccc" size={24} />;
+          }}
         />
+      </View>
+      <View style={styles.footer}>
         <RectButton style={styles.button} onPress={handleNavigateToPoints}>
           <View style={styles.buttonIcon}>
             <Text>
