@@ -24,6 +24,36 @@ Este projeto faz parte da semana Next Level da Rocketseat, projeto utilizando Ty
 - expo start
 
 
+## Telas da aplicação
+
+<table>
+	<tr>
+		<th width="33.3%">
+			Tela inicial<br>
+		</th>
+		<th width="33.3%">
+			Mapa com pontos e filtros
+		</th>
+    <th width="33.3%">
+			Tela de detalhes
+		</th>
+	</tr>
+	<tr><!-- Prevent zebra stripes --></tr>
+	<tr>
+		<td>
+			<img width="618" src="https://github.com/lcassiol/RN-ecoleta/blob/master/src/assets/screenshots/homeapp.png?raw=true">
+		</td>
+		<td>
+			<img width="618" src="https://github.com/lcassiol/RN-ecoleta/blob/master/src/assets/screenshots/mapapp.png?raw=true">
+		</td>
+    <td>
+			<img width="618" src="https://github.com/lcassiol/RN-ecoleta/blob/master/src/assets/screenshots/detailsapp.png?raw=true">
+		</td>
+	</tr>
+</table>
+
+
+
 
 --------------------
 
