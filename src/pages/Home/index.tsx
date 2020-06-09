@@ -121,7 +121,7 @@ const Home = () => {
           items={ufs}
           value={selectedUF}
           Icon={() => {
-            return <Icon name="arrow-down" color="#cccc" size={24} />;
+            return <Icon name="arrow-down" color="#34CB79" size={24} />;
           }}
         />
         <RNPickerSelect
@@ -137,21 +137,27 @@ const Home = () => {
           items={cities}
           value={selectedCity}
           Icon={() => {
-            return <Icon name="arrow-down" color="#cccc" size={24} />;
+            return <Icon name="arrow-down" color="#34CB79" size={24} />;
           }}
         />
       </View>
       <View style={styles.footer}>
-        {selectedUF && selectedCity && (
-          <RectButton style={styles.button} onPress={handleNavigateToPoints}>
-            <View style={styles.buttonIcon}>
-              <Text>
-                <Icon name="arrow-right" color="#FFF" size={24} />
-              </Text>
-            </View>
-            <Text style={styles.buttonText}>Entrar</Text>
-          </RectButton>
-        )}
+        <RectButton
+          enabled={!!selectedCity && !!selectedUF}
+          style={{
+            ...styles.button,
+            backgroundColor:
+              !!selectedCity && !!selectedUF ? "#34CB79" : "#CCC",
+          }}
+          onPress={handleNavigateToPoints}
+        >
+          <View style={styles.buttonIcon}>
+            <Text>
+              <Icon name="arrow-right" color="#FFF" size={24} />
+            </Text>
+          </View>
+          <Text style={styles.buttonText}>Entrar</Text>
+        </RectButton>
       </View>
     </ImageBackground>
   );

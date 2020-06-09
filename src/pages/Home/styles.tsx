@@ -71,18 +71,18 @@ const styles = StyleSheet.create({
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
-    fontSize: 16,
+    fontSize: 18,
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderWidth: 0.5,
-    borderColor: "#999",
+    borderColor: "#34CB79",
     borderRadius: 10,
     color: "black",
     paddingRight: 30, // to ensure the text is never behind the icon
     marginBottom: 15,
   },
   inputAndroid: {
-    fontSize: 16,
+    fontSize: 18,
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderWidth: 0.5,
